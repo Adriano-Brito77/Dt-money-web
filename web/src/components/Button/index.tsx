@@ -3,10 +3,12 @@ import { Button as StyledButton } from "./styles";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  variant?: "primary" | "secondary" | "search"; 
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
-  return <StyledButton {...props}>{children}</StyledButton>;
+const Button: React.FC<ButtonProps> = ({ children, variant, ...props }) => {
+  return <StyledButton variant={variant} {...props}>{children}</StyledButton>;
 };
 
 export default Button;
+

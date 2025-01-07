@@ -9,7 +9,7 @@ const Home = () => {
         <Header>
           <Container>
             <img src={logo} alt="logo" />
-            <Button>Nova Transação</Button>
+            <Button variant="primary">Nova Transação</Button>
           </Container>
           <ContainerCard>
             <Card>entradas</Card>
