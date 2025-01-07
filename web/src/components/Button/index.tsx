@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyledButton } from './styles';
+import React from "react";
+import { Button as StyledButton } from "./styles";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;

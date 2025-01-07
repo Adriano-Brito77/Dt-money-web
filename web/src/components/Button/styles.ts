@@ -1,14 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const StyledButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
+export const Button = styled.button`
+  background-color: #015f43;
+  color: rgb(255, 255, 255);
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 5px;
+  width: 150px;
+  height: 40px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #00b37e;
   }
 `;
