@@ -1,13 +1,6 @@
 import styled from "styled-components";
 
-export const Card = styled.div`
-  padding: 10px;
-  background-color: #323238;
-  color: #b8bec4;
-  width: 352px;
-  height: 137px;
-  border-radius: 5px;
-`;
+
 
 export const Wrapper = styled.div`
   display: flex;
@@ -35,9 +28,20 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const ContainerCard = styled.div`
-  display: flex;
-  justify-content: space-between;
+export const WrapperCard = styled.div`
+  display: flex;  
   width: 100%;
   max-width: 80%;
+  justify-content: space-between;
+ 
+  
 `;
+
+export const HeaderCard = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+
+
