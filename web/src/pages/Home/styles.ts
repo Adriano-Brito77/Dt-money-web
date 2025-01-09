@@ -12,10 +12,10 @@ export const Wrapper = styled.div`
 export const Header = styled.div`
   padding: 24px 0;
   display: flex;
-  gap: 24px;
+  gap: 40px;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(to bottom, #121214 50%, #202024 30%);
+  background: linear-gradient(to bottom, #121214 60%, #202024 40%);
   width: 100%;
   height: 250px;
 `;

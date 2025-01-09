@@ -1,7 +1,7 @@
-import { Header, Wrapper, Container,WrapperCard, HeaderCard} from "./styles";
+import { Header, Wrapper, Container} from "./styles";
 import Button from "../../components/Button";
 import logo from "../../assets/Logo.png";
-import income from "../../assets/income.png";
+
 import CardComponent from "../../components/Card";
 
 const Home = () => {
@@ -9,13 +9,17 @@ const Home = () => {
     <div>
       <Wrapper>
         <Header>
+
           <Container>
               <img src={logo} alt="logo" />
               <Button variant="primary">Nova Transação</Button>
           </Container>
-          
+
+          <Container>
           <CardComponent variant="income" name="Entradas" value={5000}/>
-          
+          <CardComponent variant="outcome" name="Saidas" value={5000}/>
+          <CardComponent variant="result" name="Total" value={0}/>
+          </Container>
           
           
         </Header>

@@ -13,7 +13,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CardComponent: React.FC<CardProps> = ({ variant, name, value,...props}) => {
     return (
-        <ContainerCard>
+        <ContainerCard   variant={variant} {...props}>
             <HeaderCard variant={variant} name={name} {...props}>
                 {name}
                 {variant === "income" && <img src={income} alt="income" />} 
@@ -22,7 +22,7 @@ const CardComponent: React.FC<CardProps> = ({ variant, name, value,...props}) =>
                 
             </HeaderCard>
             <FooterCard value={value} {...props}>
-                    {value}
+                    R$ {value}
                     
             </FooterCard>
         </ContainerCard>
