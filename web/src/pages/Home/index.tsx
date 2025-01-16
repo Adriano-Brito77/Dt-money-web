@@ -9,7 +9,11 @@ import FooterTransaction from "../../components/Transaction";
 import UseTransactions from "../../hooks/UseTransaction";
 
 const Home = () => {
-  const { getTransactionsIncome } = UseTransactions();
+  const {
+    getTransactionsIncome,
+    getTransactionsOutcome,
+    getTransactionsResult,
+  } = UseTransactions();
   return (
     <div>
       <Wrapper>
@@ -22,9 +26,21 @@ const Home = () => {
           </Container>
 
           <Container>
-            <CardComponent variant="income" name="Entradas" value={getTransactionsIncome()} />
-            <CardComponent variant="outcome" name="Saidas" value={5000} />
-            <CardComponent variant="result" name="Total" value={0} />
+            <CardComponent
+              variant="income"
+              name="Entradas"
+              value={getTransactionsIncome()}
+            />
+            <CardComponent
+              variant="outcome"
+              name="Saidas"
+              value={getTransactionsOutcome()}
+            />
+            <CardComponent
+              variant="result"
+              name="Total"
+              value={getTransactionsResult()}
+            />
           </Container>
           <FooterTransaction>teste</FooterTransaction>
         </Header>

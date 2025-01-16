@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 export const Search = styled.input`
   outline: none;
   background-color: #121214;
@@ -16,12 +20,33 @@ export const Search = styled.input`
 
 export const Footer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+
   margin-top: 20px;
 
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
+`;
+
+export const Transaction = styled.div`
+  display: flex;
+  flex-direction: column;
+  span {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 0.5fr;
+    justify-items: start;
+    padding: 10px;
+    color: #fff;
+    background-color: #323238;
+    margin-top: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
 `;
