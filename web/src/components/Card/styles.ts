@@ -13,7 +13,7 @@ export const ContainerCard = styled.div<CardProps>`
   justify-content: space-between;
   padding: 20px;
   color: #b8bec4;
-  width: 320px;
+  width: 352px;
   height: 137px;
   border-radius: 5px;
 

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Search = styled.input`
-  background-color: #000;
+  outline: none;
+  background-color: #121214;
   color: #7c7c8a;
   width: 85%;
-  height: 52px;
+  height: 56px;
   padding-left: 10px;
 
   border-radius: 5px;
