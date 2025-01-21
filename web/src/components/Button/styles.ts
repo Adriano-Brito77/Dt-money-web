@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-  variant?: "primary" | "secondary" | "search";
+  variant?: "primary" | "secondary" | "search" | "pages";
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -50,6 +50,23 @@ export const Button = styled.button<ButtonProps>`
         border: none;
         color: #fff;
       }
+
+      `
+      : variant === "pages"
+      ? `   
+      background-color: #00b37e; 
+      border:none;
+      width: 100px;
+      height: 50px;
+      font-size: bold;
+    
+
+      &:hover {
+        opacity: 0.8;
+      }
+      &:disabled {
+      opacity: 0.4;
+  }
 
       `
       : ""}

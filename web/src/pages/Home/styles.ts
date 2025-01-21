@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-
 export const Wrapper = styled.div`
   display: flex;
   background-color: #202024;
@@ -29,19 +27,14 @@ export const Container = styled.div`
 `;
 
 export const WrapperCard = styled.div`
-  display: flex;  
+  display: flex;
   width: 100%;
   max-width: 80%;
   justify-content: space-between;
- 
-  
 `;
 
 export const HeaderCard = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
-
-
-

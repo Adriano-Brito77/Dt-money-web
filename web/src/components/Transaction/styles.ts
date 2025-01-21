@@ -8,7 +8,7 @@ export const Search = styled.input`
   outline: none;
   background-color: #121214;
   color: #7c7c8a;
-  width: 85%;
+  width: 100%;
   height: 56px;
   padding-left: 10px;
 
@@ -21,9 +21,6 @@ export const Search = styled.input`
 export const Footer = styled.div`
   display: flex;
   flex-direction: column;
-
-  margin-top: 20px;
-
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
@@ -49,4 +46,13 @@ export const Transaction = styled.div`
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
       sans-serif;
   }
+`;
+
+export const WrapperPage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 16px;
+  margin-top: 15px;
 `;
