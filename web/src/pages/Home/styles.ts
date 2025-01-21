@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 export const Header = styled.div`
   padding: 24px 0;
   display: flex;
-  gap: 40px;
+  gap: 20px;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(to bottom, #121214 60%, #202024 40%);
@@ -23,7 +23,14 @@ export const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 80%;
-  margin: 0 auto;
+`;
+
+export const ContainerButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 80%;
+
 `;
 
 export const WrapperCard = styled.div`

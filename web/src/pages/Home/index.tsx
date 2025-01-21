@@ -1,4 +1,5 @@
-import { Header, Wrapper, Container } from "./styles";
+import { useState } from "react";
+import { Header, Wrapper, Container,ContainerButton } from "./styles";
 
 import Button from "../../components/Button";
 import logo from "../../assets/Logo.png";
@@ -7,22 +8,36 @@ import CardComponent from "../../components/Card";
 import FooterTransaction from "../../components/Transaction";
 
 import UseTransactions from "../../hooks/UseTransaction";
+import Modal from "../../components/Modal";
 
 const Home = () => {
-  const {
+    const {
     getTransactionsIncome,
     getTransactionsOutcome,
     getTransactionsResult,
   } = UseTransactions();
+
+  const [openCategory, setOpenCategory] = useState(false);
+ 
+
   return (
     <div>
       <Wrapper>
         <Header>
+
+          {openCategory && <Modal />}
+
+
           <Container>
             <img src={logo} alt="logo" />
-            <Button variant="primary" onClick={() => console.log()}>
-              Nova Transação
-            </Button>
+            <ContainerButton>
+              <Button variant="primary" onClick={() => setOpenCategory(!openCategory)}>
+                Categorias
+              </Button>
+              <Button variant="primary" onClick={() => console.log()}>
+                Nova Transação
+              </Button>
+            </ContainerButton>
           </Container>
 
           <Container>

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface TransactionProps {
+  type: "income" | "outcome";
+}
+
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -29,16 +33,19 @@ export const Footer = styled.div`
 export const Transaction = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 16px;  
+  margin-top: 24px;
   span {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 0.5fr;
     justify-items: start;
+    align-items: center;
     padding: 10px;
     color: #fff;
     background-color: #323238;
-    margin-top: 20px;
+    
     border-radius: 5px;
-    margin-bottom: 10px;
+    
   }
   p {
     font-size: 16px;
@@ -46,6 +53,7 @@ export const Transaction = styled.div`
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
       sans-serif;
   }
+   
 `;
 
 export const WrapperPage = styled.div`
@@ -56,3 +64,12 @@ export const WrapperPage = styled.div`
   gap: 16px;
   margin-top: 15px;
 `;
+
+export const PStyles = styled.p<TransactionProps>`
+
+    font-size: 16px;
+    font-weight: 0;
+    color:${({ type }: TransactionProps) =>
+    type === "income" ? "#00B37E" : "#ff4b4b"};
+   
+`

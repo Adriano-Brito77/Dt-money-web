@@ -19,13 +19,13 @@ const transactions: Transaction[] = [
   {
     id: "2",
     description: "Groceries",
-    price: 150,
+    price: 15000,
     category: "outcome",
     type: "outcome",
     user: "User1",
   },
   {
-    id: "1",
+    id: "3",
     description: "Salary",
     price: 5000,
     category: "Income",
@@ -59,7 +59,7 @@ const UseTransactions = () => {
       .reduce((acc, transaction) => acc + transaction.price, 0);
 
     const result = income - outcome;
-    return result;
+    return  parseFloat(result.toFixed(2));
   };
 
   return {
