@@ -1,9 +1,43 @@
 import styled from "styled-components";
-import Button from "../Button";
+
 
 interface buttonprops {
   type: "income" | "outcome";
+  isActive: boolean;
 }
+
+export const ButtonModal = styled.button<buttonprops>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #29292e;
+  color: #c4c4cc;
+  border-radius: 10px;
+  border: none;
+  width: 212px;
+  height: 58px;
+  gap: 10px;
+
+  
+  background-color: ${(props) => (
+    props.type === "income" ?
+    props.isActive ? "#00A37A" : "#29292e" 
+    :
+    props.type === "outcome" ?
+    props.isActive ? "#e83f5b" : "#29292e":
+    ''
+    )};
+  color: ${(props) => (
+    props.type === "income" ?
+    props.isActive ? "#FFF" : "#c4c4cc" 
+    :
+    props.type === "outcome" ?
+    props.isActive ? "#FFF" : "#c4c4cc":
+    ''
+    )};
+  
+`;
+
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -23,7 +57,7 @@ export const ModalContent = styled.div`
   color: #fff;
   padding: 20px;
   border-radius: 8px;
-  height: 55%;
+  height: 52%;
   width: 90%;
   max-width: 500px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -94,27 +128,11 @@ export const ContainerButton = styled.div`
   margin-top: 20px;
 `;
 
-export const ButtonModal = styled(Button)<buttonprops>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #29292e;
-  color: #c4c4cc;
-  border-radius: 10px;
-  border: none;
-  width: 212px;
-  height: 58px;
-  gap: 10px;
-
-  &:active {
-    background-color: "#00b37e";
-  }
-`;
 
 export const SaveButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 28px;
   width: 470px;
 `;

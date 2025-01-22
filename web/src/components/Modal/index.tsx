@@ -35,14 +35,25 @@ const OptionsModal = [
 
 interface ModalProps {
   closeTransaction: () => void;
+  
 }
 
-interface ButtonProps {
-  type: "income" | "outcome";
-}
 
-const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
-  const [selectedOption, setSelectedOption] = React.useState("");
+const Modal: React.FC<ModalProps> = ({ closeTransaction,  }) => {
+  
+  const [, setSelectedOption] = React.useState("");
+  const[activeButtonIncome, setActiveButtonIncome] = React.useState(false);
+  const[activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
+
+  const handleIncome = () =>{
+    setActiveButtonIncome(true)
+    setActiveButtonOutcome(false)
+  }
+  const handleOutcome = () =>{
+    setActiveButtonIncome(false)
+    setActiveButtonOutcome(true)
+  }
+  
 
   return (
     <Wrapper>
@@ -65,14 +76,23 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
           </SelectModal>
         </BodyModal>
         <ContainerButton>
-          <ButtonModal type="income">
+          <ButtonModal 
+          type="income" 
+          isActive={activeButtonIncome}
+          onClick={handleIncome} >
+            
             <img src={income} alt="income" />
             <span>Entrada</span>
           </ButtonModal>
-          <ButtonModal type="outcome">
+          <ButtonModal 
+          type="outcome" 
+          isActive={activeButtonOutcome}
+          onClick={handleOutcome}>
+            
             <img src={outcome} alt="outcome" />
             <span>Saída</span>
           </ButtonModal>
+          
         </ContainerButton>
         <SaveButton>
           <Button variant="primary">Salvar</Button>
