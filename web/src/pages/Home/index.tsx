@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header, Wrapper, Container,ContainerButton } from "./styles";
+import { Header, Wrapper, Container, ContainerButton } from "./styles";
 
 import Button from "../../components/Button";
 import logo from "../../assets/Logo.png";
@@ -11,30 +11,30 @@ import UseTransactions from "../../hooks/UseTransaction";
 import Modal from "../../components/Modal";
 
 const Home = () => {
-    const {
+  const {
     getTransactionsIncome,
     getTransactionsOutcome,
     getTransactionsResult,
   } = UseTransactions();
 
-  const [openCategory, setOpenCategory] = useState(false);
- 
+  const [openTransaction, setOpenCloseTransaction] = useState(false);
 
   return (
     <div>
       <Wrapper>
         <Header>
-
-          {openCategory && <Modal />}
-
+          {openTransaction && (
+            <Modal closeTransaction={() => setOpenCloseTransaction(false)} />
+          )}
 
           <Container>
             <img src={logo} alt="logo" />
             <ContainerButton>
-              <Button variant="primary" onClick={() => setOpenCategory(!openCategory)}>
-                Categorias
-              </Button>
-              <Button variant="primary" onClick={() => console.log()}>
+              <Button variant="primary">Categorias</Button>
+              <Button
+                variant="primary"
+                onClick={() => setOpenCloseTransaction(!openTransaction)}
+              >
                 Nova Transação
               </Button>
             </ContainerButton>
