@@ -9,7 +9,7 @@ import FooterTransaction from "../../components/Transaction";
 
 import UseTransactions from "../../hooks/UseTransaction";
 import Modal from "../../components/Modal";
-
+import ModalCategory from "../../components/Modal/Category";
 const Home = () => {
   const {
     getTransactionsIncome,
@@ -18,6 +18,7 @@ const Home = () => {
   } = UseTransactions();
 
   const [openTransaction, setOpenCloseTransaction] = useState(false);
+  const [openCategory, setOpenCategory] = useState(false);
 
   return (
     <div>
@@ -26,11 +27,20 @@ const Home = () => {
           {openTransaction && (
             <Modal closeTransaction={() => setOpenCloseTransaction(false)} />
           )}
+          {openCategory && (
+            <ModalCategory closeTransaction={() => setOpenCategory(false)} />
+          )}
 
           <Container>
             <img src={logo} alt="logo" />
             <ContainerButton>
-              <Button variant="primary">Categorias</Button>
+              <Button
+                variant="primary"
+                onClick={() => setOpenCategory(!openCategory)}
+              >
+                Categorias
+              </Button>
+
               <Button
                 variant="primary"
                 onClick={() => setOpenCloseTransaction(!openTransaction)}
