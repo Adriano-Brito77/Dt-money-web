@@ -34,7 +34,7 @@ const Content = styled.div<{ bgColor: string }>`
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: green;
+  background-color: ${(props) => props.bgColor};
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -77,9 +77,12 @@ export default function ButtonContentTransition(): JSX.Element {
         )}
 
         {activeContent === "content2" && (
-          <Content bgColor="blue">This is Content 2</Content>
+          <Content bgColor="green
+          ">This is Content 2</Content>
         )}
       </ContentContainer>
     </div>
   );
 }
+
+

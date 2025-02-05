@@ -22,8 +22,21 @@ export const ModalContent = styled.div`
 
 export const ContainerButton = styled.div`
   display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
   background: #202024;
-  width: 100%;
+  width: 90%;
   height: 10%;
   border-radius: 10px;
+`;
+
+export const Containermodal = styled.div`
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  color:#fff;
+  font-size: 28px;
+  width: 10%;
+  height: 10%;
+  
 `;

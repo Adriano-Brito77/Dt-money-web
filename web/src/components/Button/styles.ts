@@ -7,7 +7,7 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   color: #fff;
-  border-radius: 5px;
+  
 
   ${({ variant, position }) =>
     variant === "primary"
@@ -17,6 +17,7 @@ export const Button = styled.button<ButtonProps>`
       width: 190px;
       height: 50px;
       font-size: bold;
+      border-radius: 5px;
 
       &:hover {
         opacity: 0.8;
@@ -28,6 +29,7 @@ export const Button = styled.button<ButtonProps>`
       border:none;
       width: 438px;
       height: 58px;
+      border-radius: 5px;
 
       &:hover {
         opacity: 0.8;
@@ -41,6 +43,7 @@ export const Button = styled.button<ButtonProps>`
       background-color: #202024;
       color: #00b37e;
       border: 1px solid #00b37e;
+      border-radius: 5px;
 
       width: 147px;
       height: 54px;
@@ -60,6 +63,7 @@ export const Button = styled.button<ButtonProps>`
       width: 100px;
       height: 50px;
       font-size: bold;
+      border-radius: 5px;
     
 
       &:hover {
@@ -72,14 +76,16 @@ export const Button = styled.button<ButtonProps>`
       `
       : variant === "category"
       ? `   
+      display:flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
       background-color: #121214; 
       border:none;
-      width: 50%;
+      width:30%;
       height: 50px;
-      font-size: bold;
-      border-radius:${
-        position === "left" ? "10px 0px 0px 0px" : "0px 10px 0px 0px"
-      };
+   
+      
     
 
       &:hover {
