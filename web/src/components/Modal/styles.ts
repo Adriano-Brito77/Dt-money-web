@@ -6,6 +6,12 @@ interface buttonprops {
   isActive: boolean;
 }
 
+interface inputprops {
+  height: "large" | "small";
+  
+}
+
+
 export const ButtonModal = styled.button<buttonprops>`
   display: flex;
   justify-content: center;
@@ -84,10 +90,10 @@ export const BodyModal = styled.div`
   margin-top: 40px;
 `;
 
-export const InputModal = styled.input`
-  width: 100%;
+export const InputModal = styled.input<inputprops>`
+  width: ${(props) => (props.height === "large" ? "100%" : "70%")}; 
   height: 40px;
-  padding: 10px;
+  padding: ${(props) => (props.height === "large" ? "10px" : "12px")};
   margin-bottom: 10px;
   border-radius: 8px;
   border: none;

@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "search" | "pages" | "category";
-  position?: "left";
+  
+  isActive?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
   color: #fff;
   
 
-  ${({ variant, position }) =>
+  ${({ variant, isActive }) =>
     variant === "primary"
       ? `
       background-color: #00b37e; 
@@ -80,11 +81,14 @@ export const Button = styled.button<ButtonProps>`
       gap: 20px;
       justify-content: center;
       align-items: center;
-      background-color: #121214; 
-      border:none;
-      width:30%;
+      background-color: #202024; 
+      width:40%;
       height: 50px;
-   
+      font-weight: 500;
+      font-size: 28px;
+      
+      border-color:${isActive ? 'transparent transparent #00b37e transparent ' : 'transparent'};
+
       
     
 

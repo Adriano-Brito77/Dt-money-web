@@ -63,8 +63,8 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction,  }) => {
           <CgClose onClick={closeTransaction} />
         </HeaderModal>
         <BodyModal>
-          <InputModal placeholder="Descrição" />
-          <InputModal placeholder="Preço" />
+          <InputModal height="large" placeholder="Descrição" />
+          <InputModal height="large" type="number" placeholder="Preço" />
 
           <SelectModal onChange={(e: any) => setSelectedOption(e.target.value)}>
             <StyledOption value="">Categorias</StyledOption>
