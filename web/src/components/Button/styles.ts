@@ -61,7 +61,7 @@ export const Button = styled.button<ButtonProps>`
       ? `   
       background-color: #00b37e; 
       border:none;
-      width: 100px;
+      width: 120px;
       height: 50px;
       font-size: bold;
       border-radius: 5px;

@@ -7,7 +7,7 @@ interface buttonprops {
 }
 
 interface inputprops {
-  height: "large" | "small";
+  height: "large" | 'medium'|"small";
   
 }
 
@@ -91,9 +91,10 @@ export const BodyModal = styled.div`
 `;
 
 export const InputModal = styled.input<inputprops>`
-  width: ${(props) => (props.height === "large" ? "100%" : "70%")}; 
-  height: 40px;
-  padding: ${(props) => (props.height === "large" ? "10px" : "12px")};
+ 
+
+
+
   margin-bottom: 10px;
   border-radius: 8px;
   border: none;
@@ -101,7 +102,29 @@ export const InputModal = styled.input<inputprops>`
   color: #7c7c8a;
   font-size: 16px;
   outline: none;
-  padding-left: 15px;
+  padding-left: 16px;
+
+  ${({height})=> 
+    height === "large" ?`
+      width: 100%;
+      padding:10px;
+      height: 40px;
+    `:
+    height === "medium" ? `
+      width: 95%;
+      padding:20px;
+      opacity:0.8;
+      color:#fff;
+      
+    `:
+    height==="small"?`
+      width: 70%;
+      padding:10px;
+      height:40px;   
+    `:""
+}
+
+
 `;
 
 export const SelectModal = styled.select`
@@ -142,3 +165,6 @@ export const SaveButton = styled.div`
   padding-top: 28px;
   width: 470px;
 `;
+
+
+
