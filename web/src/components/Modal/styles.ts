@@ -1,16 +1,13 @@
 import styled from "styled-components";
 
-
 interface buttonprops {
   type: "income" | "outcome";
   isActive: boolean;
 }
 
 interface inputprops {
-  height: "large" | 'medium'|"small";
-  
+  height: "large" | "register" | "medium" | "small";
 }
-
 
 export const ButtonModal = styled.button<buttonprops>`
   display: flex;
@@ -24,26 +21,27 @@ export const ButtonModal = styled.button<buttonprops>`
   height: 58px;
   gap: 10px;
 
-  
-  background-color: ${(props) => (
-    props.type === "income" ?
-    props.isActive ? "#00A37A" : "#29292e" 
-    :
-    props.type === "outcome" ?
-    props.isActive ? "#e83f5b" : "#29292e":
-    ''
-    )};
-  color: ${(props) => (
-    props.type === "income" ?
-    props.isActive ? "#FFF" : "#c4c4cc" 
-    :
-    props.type === "outcome" ?
-    props.isActive ? "#FFF" : "#c4c4cc":
-    ''
-    )};
-  
+  background-color: ${(props) =>
+    props.type === "income"
+      ? props.isActive
+        ? "#00A37A"
+        : "#29292e"
+      : props.type === "outcome"
+      ? props.isActive
+        ? "#e83f5b"
+        : "#29292e"
+      : ""};
+  color: ${(props) =>
+    props.type === "income"
+      ? props.isActive
+        ? "#FFF"
+        : "#c4c4cc"
+      : props.type === "outcome"
+      ? props.isActive
+        ? "#FFF"
+        : "#c4c4cc"
+      : ""};
 `;
-
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -91,10 +89,6 @@ export const BodyModal = styled.div`
 `;
 
 export const InputModal = styled.input<inputprops>`
- 
-
-
-
   margin-bottom: 10px;
   border-radius: 8px;
   border: none;
@@ -104,27 +98,34 @@ export const InputModal = styled.input<inputprops>`
   outline: none;
   padding-left: 16px;
 
-  ${({height})=> 
-    height === "large" ?`
+  ${({ height }) =>
+    height === "large"
+      ? `
       width: 100%;
       padding:10px;
       height: 40px;
-    `:
-    height === "medium" ? `
+    `
+      : height === "medium"
+      ? `
       width: 95%;
       padding:20px;
       opacity:0.8;
       color:#fff;
       
-    `:
-    height==="small"?`
+    `
+      : height === "small"
+      ? `
       width: 70%;
       padding:10px;
       height:40px;   
-    `:""
-}
-
-
+    `
+      : height === "register"
+      ? `
+    max-width: 100%;
+    padding:10px;
+    height:40px;   
+  `
+      : ""}
 `;
 
 export const SelectModal = styled.select`
@@ -157,7 +158,6 @@ export const ContainerButton = styled.div`
   margin-top: 20px;
 `;
 
-
 export const SaveButton = styled.div`
   display: flex;
   justify-content: center;
@@ -165,6 +165,3 @@ export const SaveButton = styled.div`
   padding-top: 28px;
   width: 470px;
 `;
-
-
-
