@@ -6,12 +6,13 @@ export const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  background-color: #121214;
 `;
 
 export const Container = styled.form`
   height: 70%;
   width: 30%;
-  border: 1px solid #00b37e;
+  background-color: rgb(36, 36, 39);
   color: #fff;
   border-radius: 5px;
   display: flex;

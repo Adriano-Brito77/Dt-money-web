@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Footer,
   Search,
@@ -276,6 +276,9 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
     "price",
     "user",
   ];
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const filterTransactions = (transactions: TransactionData[]) => {
     return transactions.filter((transaction) =>
