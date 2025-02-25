@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Wrapper, Container, LabelReg, ContainerInput } from "./styles";
 import { InputModal } from "../../components/Modal/styles";
 import { Button } from "../../components/Button/styles";
 import { LinkAuth } from "../Login/styles";
+import Context from "../../context/UseContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
+  const [user, setUser] = useState({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper>
       <Container>
         <h1>Registre-se</h1>
-        <ContainerInput>
+        <ContainerInput onSubmit={handleSubmit}>
           <LabelReg htmlFor="name">Nome:</LabelReg>
           <InputModal
             id="name"
             type="name"
+            onChange={handleChange}
             placeholder="Digite seu nome"
             height="register"
           />
@@ -22,6 +36,7 @@ const Register = () => {
           <InputModal
             id="email"
             type="email"
+            onChange={handleChange}
             placeholder="Digite seu email"
             height="register"
           />
@@ -30,6 +45,7 @@ const Register = () => {
           <InputModal
             id="pass"
             type="password"
+            onChange={handleChange}
             placeholder="Digite seu senha"
             height="register"
           />
@@ -38,13 +54,17 @@ const Register = () => {
           <InputModal
             id="Confirmpass"
             type="password"
+            onChange={handleChange}
             placeholder="Digite seu senha"
             height="register"
           />
           <LinkAuth href="auth">teste</LinkAuth>
+          <Button variant="primary" type="submit">
+            Cadastrar-se
+          </Button>
         </ContainerInput>
-        <Button variant="primary">Cadastrar-se</Button>
       </Container>
+      <ToastContainer />
     </Wrapper>
   );
 };

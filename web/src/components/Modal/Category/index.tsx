@@ -1,15 +1,22 @@
-import { Wrapper, ModalContent, ContainerButton,Containermodal,HeaderCategory,BodyCategory,CategoryList,ContainerCategory } from "./styles";
+import {
+  Wrapper,
+  ModalContent,
+  ContainerButton,
+  Containermodal,
+  HeaderCategory,
+  BodyCategory,
+  CategoryList,
+  ContainerCategory,
+} from "./styles";
 import { Button } from "../../Button/styles";
 import { CgClose } from "react-icons/cg";
 import React from "react";
 import { InputModal } from "../styles";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ModalProps {
   closeTransaction: () => void;
-
-  
 }
-
 
 const categories = [
   { name: "retiradas" },
@@ -36,56 +43,57 @@ const categories = [
 
 console.log(categories);
 
+const ModalCategory: React.FC<ModalProps> = ({ closeTransaction }) => {
+  const [activeButtonIncome, setActiveButtonIncome] = React.useState(true);
+  const [activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
 
-  const ModalCategory: React.FC<ModalProps> = ({closeTransaction}) => {
-
-    const[activeButtonIncome, setActiveButtonIncome] = React.useState(true);
-      const[activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
-    
-      const handleIncome = () =>{
-        setActiveButtonIncome(true)
-        setActiveButtonOutcome(false)
-      }
-      const handleOutcome = () =>{
-        setActiveButtonIncome(false)
-        setActiveButtonOutcome(true)
-      }
+  const handleIncome = () => {
+    setActiveButtonIncome(true);
+    setActiveButtonOutcome(false);
+  };
+  const handleOutcome = () => {
+    setActiveButtonIncome(false);
+    setActiveButtonOutcome(true);
+  };
   return (
-    <Wrapper  >
-      <ModalContent type = {activeButtonIncome}>
-      <HeaderCategory>
+    <Wrapper>
+      <ModalContent type={activeButtonIncome}>
+        <HeaderCategory>
           <ContainerButton>
-            <Button variant="category"  onClick={handleIncome} isActive={activeButtonIncome}>
+            <Button
+              variant="category"
+              onClick={handleIncome}
+              isActive={activeButtonIncome}
+            >
               Criar Categoria
             </Button>
-            <Button variant="category" onClick={handleOutcome} isActive={activeButtonOutcome}
-            >Categorias
+            <Button
+              variant="category"
+              onClick={handleOutcome}
+              isActive={activeButtonOutcome}
+            >
+              Categorias
             </Button>
           </ContainerButton>
           <Containermodal>
             <CgClose onClick={closeTransaction} />
           </Containermodal>
-      </HeaderCategory>
-      {activeButtonIncome ? (
-        <BodyCategory>
-          <InputModal height="small" placeholder="Descrição"></InputModal>
-          <Button variant="primary">Adicionar</Button>
-        </BodyCategory>
-    ) : (
-
-      <CategoryList>
-        {categories.map((category) => (
-          <ContainerCategory key={category.name}>
-            <p>{category.name}</p>
-            <CgClose/>
-          </ContainerCategory>
-        ))}
-      </CategoryList>
-
-      
-    )}
-        
-        
+        </HeaderCategory>
+        {activeButtonIncome ? (
+          <BodyCategory>
+            <InputModal height="small" placeholder="Descrição"></InputModal>
+            <Button variant="primary">Adicionar</Button>
+          </BodyCategory>
+        ) : (
+          <CategoryList>
+            {categories.map((category) => (
+              <ContainerCategory key={category.name}>
+                <p>{category.name}</p>
+                <CgClose />
+              </ContainerCategory>
+            ))}
+          </CategoryList>
+        )}
       </ModalContent>
     </Wrapper>
   );

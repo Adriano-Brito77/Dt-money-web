@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Wrapper,
   ModalContent,
@@ -17,6 +17,7 @@ import income from "../../assets/income.png";
 import outcome from "../../assets/outcome.png";
 
 import { CgClose } from "react-icons/cg";
+import api from "../../utils/api";
 
 const OptionsModal = [
   {
@@ -32,28 +33,23 @@ const OptionsModal = [
     createdAt: "2024-12-18T19:01:18.231Z",
   },
 ];
-
 interface ModalProps {
   closeTransaction: () => void;
-  
 }
 
-
-const Modal: React.FC<ModalProps> = ({ closeTransaction,  }) => {
-  
+const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
   const [, setSelectedOption] = React.useState("");
-  const[activeButtonIncome, setActiveButtonIncome] = React.useState(false);
-  const[activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
+  const [activeButtonIncome, setActiveButtonIncome] = React.useState(false);
+  const [activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
 
-  const handleIncome = () =>{
-    setActiveButtonIncome(true)
-    setActiveButtonOutcome(false)
-  }
-  const handleOutcome = () =>{
-    setActiveButtonIncome(false)
-    setActiveButtonOutcome(true)
-  }
-  
+  const handleIncome = () => {
+    setActiveButtonIncome(true);
+    setActiveButtonOutcome(false);
+  };
+  const handleOutcome = () => {
+    setActiveButtonIncome(false);
+    setActiveButtonOutcome(true);
+  };
 
   return (
     <Wrapper>
@@ -76,23 +72,22 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction,  }) => {
           </SelectModal>
         </BodyModal>
         <ContainerButton>
-          <ButtonModal 
-          type="income" 
-          isActive={activeButtonIncome}
-          onClick={handleIncome} >
-            
+          <ButtonModal
+            type="income"
+            isActive={activeButtonIncome}
+            onClick={handleIncome}
+          >
             <img src={income} alt="income" />
             <span>Entrada</span>
           </ButtonModal>
-          <ButtonModal 
-          type="outcome" 
-          isActive={activeButtonOutcome}
-          onClick={handleOutcome}>
-            
+          <ButtonModal
+            type="outcome"
+            isActive={activeButtonOutcome}
+            onClick={handleOutcome}
+          >
             <img src={outcome} alt="outcome" />
             <span>Saída</span>
           </ButtonModal>
-          
         </ContainerButton>
         <SaveButton>
           <Button variant="primary">Salvar</Button>

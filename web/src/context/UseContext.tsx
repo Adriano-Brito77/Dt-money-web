@@ -1,18 +1,29 @@
 import { createContext } from "react";
+import { useAuth } from "../hooks/UseAuth";
 
-export const Context = createContext({});
+// Definindo a tipagem do contexto
+export interface AuthContextProps {
+  register: (user: any) => void;
+  login: (user: any) => void;
+  logout: () => void;
+  authenticated: boolean;
+  loading: boolean;
+}
+
+// Criando o contexto com a tipagem
+export const Context = createContext<AuthContextProps | null>(null);
 
 interface childrenProps {
   children: React.ReactNode;
 }
+
 export const UserProvider = ({ children }: childrenProps) => {
-  
+  // Chamando o hook useAuth sem passar argumentos
+  const { register, login, logout, authenticated, loading } = useAuth();
 
   return (
     <Context.Provider
-        value={{
-            
-        }}
+      value={{ register, login, logout, authenticated, loading }}
     >
       {children}
     </Context.Provider>

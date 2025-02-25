@@ -7,6 +7,7 @@ import {
   WrapperPage,
   PStyles,
 } from "./styles";
+import api from "../../utils/api";
 
 import { Button } from "../Button/styles";
 
