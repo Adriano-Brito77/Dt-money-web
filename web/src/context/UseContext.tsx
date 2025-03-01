@@ -1,10 +1,13 @@
 import { createContext } from "react";
 import { useAuth } from "../hooks/UseAuth";
+import { User } from "../pages/Register";
+import { UserLogin } from "../pages/Login";
 
 // Definindo a tipagem do contexto
-export interface AuthContextProps {
-  register: (user: any) => void;
-  login: (user: any) => void;
+// No seu Contexto
+interface AuthContextProps {
+  register: (user: User) => void;  // Garantindo que a função register aceite um User
+  login: (user: UserLogin) => void;
   logout: () => void;
   authenticated: boolean;
   loading: boolean;

@@ -4,11 +4,34 @@ import { InputModal } from "../../components/Modal/styles";
 import { Button } from "../../components/Button/styles";
 import { LinkAuth } from "../Login/styles";
 import Context from "../../context/UseContext";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {ContainerLink} from "../Login/styles"
+
+
+
+export interface User {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const Register = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User>({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error("Contexto não encontrado. Verifique se o Provider está correto.");
+  }
+
+  const { register } = context;
+
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.id]: e.target.value });
@@ -16,13 +39,17 @@ const Register = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    register(user);
+  
   };
+
+  console.log(user)
 
   return (
     <Wrapper>
-      <Container>
+      <Container onSubmit={handleSubmit}>
         <h1>Registre-se</h1>
-        <ContainerInput onSubmit={handleSubmit}>
+        <ContainerInput >
           <LabelReg htmlFor="name">Nome:</LabelReg>
           <InputModal
             id="name"
@@ -43,7 +70,7 @@ const Register = () => {
 
           <LabelReg htmlFor="pass">Senha:</LabelReg>
           <InputModal
-            id="pass"
+            id="password"
             type="password"
             onChange={handleChange}
             placeholder="Digite seu senha"
@@ -52,19 +79,22 @@ const Register = () => {
 
           <LabelReg htmlFor="confirmpass">Confirme sua senha:</LabelReg>
           <InputModal
-            id="Confirmpass"
+            id="confirmPassword"
             type="password"
             onChange={handleChange}
             placeholder="Digite seu senha"
             height="register"
           />
-          <LinkAuth href="auth">teste</LinkAuth>
-          <Button variant="primary" type="submit">
+          <ContainerLink>
+            <p>Se ja possui conta</p>
+          <LinkAuth href="auth">Clique aqui</LinkAuth>
+          </ContainerLink>
+        </ContainerInput>
+        <Button variant="primary" type="submit">
             Cadastrar-se
           </Button>
-        </ContainerInput>
       </Container>
-      <ToastContainer />
+      
     </Wrapper>
   );
 };

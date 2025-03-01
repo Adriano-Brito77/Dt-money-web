@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.form<ContainerProps>`
-  height: 55%;
+  height: 60%;
   width: 34%;
   display: flex;
   font-size: 1.5rem;
@@ -25,6 +25,7 @@ export const Container = styled.form<ContainerProps>`
   background-color: #323238;
   border-radius: 0px 10px 10px 0px;
   gap: 40px;
+  
 
   ${(props) =>
     props.posistion === "left"
@@ -67,6 +68,8 @@ export const ContainerLink = styled.div`
   height: 10%;
   width: 101%;
   padding-left: 4px;
+  align-items: center;
+
 `;
 
 export const LinkAuth = styled.a`

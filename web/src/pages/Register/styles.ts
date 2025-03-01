@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.form`
-  height: 70%;
+  height: 80%;
   width: 30%;
   background-color: rgb(36, 36, 39);
   color: #fff;
@@ -20,9 +20,10 @@ export const Container = styled.form`
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  
 `;
 
-export const ContainerInput = styled.form`
+export const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

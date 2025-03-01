@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import api from "../utils/api";
 import Cookies from "js-cookie";
@@ -22,24 +22,25 @@ export const useAuth = () => {
 
   const register = async (user: any) => {
     try {
-      const data = await api.post("user/register", user);
-      toast.success("Cadastro realizado com sucesso!");
-      navigate("/auth");
-      console.log(data);
+      const data = await api.post("user/register", user).then((response) => response.data);
+      toast.success(`${data.message}`);
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message ||
         "Erro ao realizar cadastro. Tente novamente.";
       toast.error(errorMessage);
     }
+   
   };
   const login = async (user: any) => {
     try {
       const data = api
         .post("/auth/login", user)
         .then((response) => response.data);
-
+        toast.success(`pronto para logar`);
       await authUser(data);
+      
+
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message ||

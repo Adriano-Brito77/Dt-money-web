@@ -123,7 +123,13 @@ export const InputModal = styled.input<inputprops>`
       ? `
     max-width: 100%;
     padding:10px;
-    height:40px;   
+    height:40px;  
+    color:#ffff;
+    
+    &::placeholder{
+      color: #7c7c8a;
+}
+    
   `
       : ""}
 `;
