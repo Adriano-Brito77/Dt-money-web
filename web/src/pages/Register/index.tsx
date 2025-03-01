@@ -4,9 +4,7 @@ import { InputModal } from "../../components/Modal/styles";
 import { Button } from "../../components/Button/styles";
 import { LinkAuth } from "../Login/styles";
 import Context from "../../context/UseContext";
-import {ContainerLink} from "../Login/styles"
-
-
+import { ContainerLink } from "../Login/styles";
 
 export interface User {
   name: string;
@@ -17,21 +15,21 @@ export interface User {
 
 const Register = () => {
   const [user, setUser] = useState<User>({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const context = useContext(Context);
 
   if (!context) {
-    throw new Error("Contexto não encontrado. Verifique se o Provider está correto.");
+    throw new Error(
+      "Contexto não encontrado. Verifique se o Provider está correto."
+    );
   }
 
   const { register } = context;
-
-  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.id]: e.target.value });
@@ -40,16 +38,15 @@ const Register = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     register(user);
-  
   };
 
-  console.log(user)
+  console.log(user);
 
   return (
     <Wrapper>
       <Container onSubmit={handleSubmit}>
         <h1>Registre-se</h1>
-        <ContainerInput >
+        <ContainerInput>
           <LabelReg htmlFor="name">Nome:</LabelReg>
           <InputModal
             id="name"
@@ -87,14 +84,13 @@ const Register = () => {
           />
           <ContainerLink>
             <p>Se ja possui conta</p>
-          <LinkAuth href="auth">Clique aqui</LinkAuth>
+            <LinkAuth href="auth">Clique aqui</LinkAuth>
           </ContainerLink>
         </ContainerInput>
-        <Button variant="primary" type="submit">
-            Cadastrar-se
-          </Button>
+        <Button $variant="primary" type="submit">
+          Cadastrar-se
+        </Button>
       </Container>
-      
     </Wrapper>
   );
 };

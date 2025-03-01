@@ -1,4 +1,4 @@
-import React,{useState,useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   Wrapper,
   Container,
@@ -12,7 +12,6 @@ import { InputModal } from "../../components/Modal/styles";
 import Button from "../../components/Button";
 import Context from "../../context/UseContext";
 
-
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   posistion?: "left" | "right";
 }
@@ -23,29 +22,28 @@ export interface UserLogin {
 }
 
 const Auth: React.FC<ContainerProps> = () => {
-
   const [user, setUser] = useState<UserLogin>({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
-
-const context = useContext(Context);
+  const context = useContext(Context);
 
   if (!context) {
-    throw new Error("Contexto não encontrado. Verifique se o Provider está correto.");
+    throw new Error(
+      "Contexto não encontrado. Verifique se o Provider está correto."
+    );
   }
 
   const { login } = context;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.id]: e.target.value });  
-  }
-  const handleSbmit = (e: React.FormEvent<HTMLFormElement>) => {  
+    setUser({ ...user, [e.target.id]: e.target.value });
+  };
+  const handleSbmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(user);
-  }
-
+  };
 
   return (
     <Wrapper>
@@ -55,7 +53,7 @@ const context = useContext(Context);
       <Container posistion="right" onSubmit={handleSbmit}>
         <h1>Acesse sua conta</h1>
 
-        <ContainerInput   > 
+        <ContainerInput>
           <label htmlFor="email">E-mail:</label>
           <InputModal
             id="email"
@@ -66,11 +64,11 @@ const context = useContext(Context);
           />
           <label htmlFor="pass">Senha:</label>
           <InputModal
-            id="pass"
+            id="password"
             type="password"
             height="medium"
             placeholder="Digite sua senha"
-            onChange={handleChange} 
+            onChange={handleChange}
           />
 
           <ContainerLink>
@@ -79,12 +77,12 @@ const context = useContext(Context);
           </ContainerLink>
 
           <ContainerButton>
-            <Button variant="primary" type="submit">Entrar</Button>
+            <Button variant="primary" type="submit">
+              Entrar
+            </Button>
           </ContainerButton>
         </ContainerInput>
-        
       </Container>
-      
     </Wrapper>
   );
 };

@@ -90,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
           </ButtonModal>
         </ContainerButton>
         <SaveButton>
-          <Button variant="primary">Salvar</Button>
+          <Button $variant="primary">Salvar</Button>
         </SaveButton>
       </ModalContent>
     </Wrapper>

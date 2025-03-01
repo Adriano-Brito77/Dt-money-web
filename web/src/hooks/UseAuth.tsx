@@ -22,28 +22,30 @@ export const useAuth = () => {
 
   const register = async (user: any) => {
     try {
-      const data = await api.post("user/register", user).then((response) => response.data);
+      const data = await api
+        .post("user/register", user)
+        .then((response) => response.data);
       toast.success(`${data.message}`);
+      await navigate("/auth");
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message ||
         "Erro ao realizar cadastro. Tente novamente.";
       toast.error(errorMessage);
     }
-   
   };
   const login = async (user: any) => {
     try {
-      const data = api
-        .post("/auth/login", user)
-        .then((response) => response.data);
-        toast.success(`pronto para logar`);
+      const data = await api.post("/auth/login", user).then((response) => {
+        return response.data;
+      });
       await authUser(data);
-      
+      toast.success("Login realizado com sucesso!");
+    } catch (err: any) {
+      console.log(err);
 
-    } catch (error: any) {
       const errorMessage =
-        error.response?.data?.message ||
+        err.response.data.message ||
         "Erro ao realizar cadastro. Tente novamente.";
       toast.error(errorMessage);
     }
@@ -51,12 +53,9 @@ export const useAuth = () => {
 
   const authUser = async (data: any) => {
     setAuthenticated(true);
-
+    console.log(data);
     // Armazenando o token no cookie com um tempo de expiração
-    Cookies.set("token", data.token, {
-      expires: 7,
-      sameSite: "Strict",
-    });
+    Cookies.set("token", data.acess_token);
 
     navigate("/");
   };

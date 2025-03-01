@@ -346,14 +346,14 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
       {totalPages > 1 && (
         <WrapperPage>
           <Button
-            variant="pages"
+            $variant="pages"
             onClick={() => goFirtsPage()}
             disabled={currentPage === 1}
           >
             Primeira pagina
           </Button>
           <Button
-            variant="pages"
+            $variant="pages"
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 1}
           >
@@ -364,14 +364,14 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
             {currentPage} de {totalPages}
           </span>
           <Button
-            variant="pages"
+            $variant="pages"
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
             Próxima
           </Button>
           <Button
-            variant="pages"
+            $variant="pages"
             onClick={() => goLastPage()}
             disabled={currentPage === totalPages}
           >

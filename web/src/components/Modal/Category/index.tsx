@@ -10,15 +10,18 @@ import {
 } from "./styles";
 import { Button } from "../../Button/styles";
 import { CgClose } from "react-icons/cg";
-import React from "react";
+import React, { ReactElement } from "react";
 import { InputModal } from "../styles";
-import { ToastContainer, toast } from "react-toastify";
+import api from "../../../utils/api";
 
 interface ModalProps {
   closeTransaction: () => void;
 }
+interface Category {
+  name: string;
+}
 
-const categories = [
+const categories: Category[] = [
   { name: "retiradas" },
   { name: "saídas" },
   { name: "alimentação" },
@@ -41,12 +44,28 @@ const categories = [
   { name: "outros" },
 ];
 
-console.log(categories);
-
 const ModalCategory: React.FC<ModalProps> = ({ closeTransaction }) => {
   const [activeButtonIncome, setActiveButtonIncome] = React.useState(true);
   const [activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
+  const [category, setCategory] = React.useState<Category>({ name: "" });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCategory({ ...category, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const newCategory = await api
+        .post("/category", category)
+        .then((response) => {
+          return response.data;
+        });
+      console.log(newCategory);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleIncome = () => {
     setActiveButtonIncome(true);
     setActiveButtonOutcome(false);
@@ -61,16 +80,16 @@ const ModalCategory: React.FC<ModalProps> = ({ closeTransaction }) => {
         <HeaderCategory>
           <ContainerButton>
             <Button
-              variant="category"
+              $variant="category"
               onClick={handleIncome}
-              isActive={activeButtonIncome}
+              $isActive={activeButtonIncome}
             >
               Criar Categoria
             </Button>
             <Button
-              variant="category"
+              $variant="category"
               onClick={handleOutcome}
-              isActive={activeButtonOutcome}
+              $isActive={activeButtonOutcome}
             >
               Categorias
             </Button>
@@ -80,9 +99,14 @@ const ModalCategory: React.FC<ModalProps> = ({ closeTransaction }) => {
           </Containermodal>
         </HeaderCategory>
         {activeButtonIncome ? (
-          <BodyCategory>
-            <InputModal height="small" placeholder="Descrição"></InputModal>
-            <Button variant="primary">Adicionar</Button>
+          <BodyCategory onSubmit={handleSubmit}>
+            <InputModal
+              height="small"
+              placeholder="Descrição"
+              name="name"
+              onChange={handleChange}
+            />
+            <Button $variant="primary">Criar</Button>
           </BodyCategory>
         ) : (
           <CategoryList>

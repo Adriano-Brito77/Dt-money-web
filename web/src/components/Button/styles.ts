@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-  variant?: "primary" | "secondary" | "search" | "pages" | "category";
-  
-  isActive?: boolean;
+  $variant?: "primary" | "secondary" | "search" | "pages" | "category";
+
+  $isActive?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
   color: #fff;
-  
 
-  ${({ variant, isActive }) =>
-    variant === "primary"
+  ${({ $variant, $isActive }) =>
+    $variant === "primary"
       ? `
       background-color: #00b37e; 
       border:none;
@@ -24,7 +23,7 @@ export const Button = styled.button<ButtonProps>`
         opacity: 0.8;
       }
       `
-      : variant === "secondary"
+      : $variant === "secondary"
       ? `
       background-color: #00b37e; 
       border:none;
@@ -36,7 +35,7 @@ export const Button = styled.button<ButtonProps>`
         opacity: 0.8;
       }
       `
-      : variant === "search"
+      : $variant === "search"
       ? `
       display: flex;
       justify-content: space-evenly;
@@ -57,7 +56,7 @@ export const Button = styled.button<ButtonProps>`
       }
 
       `
-      : variant === "pages"
+      : $variant === "pages"
       ? `   
       background-color: #00b37e; 
       border:none;
@@ -75,7 +74,7 @@ export const Button = styled.button<ButtonProps>`
   }
 
       `
-      : variant === "category"
+      : $variant === "category"
       ? `   
       display:flex;
       gap: 20px;
@@ -87,7 +86,11 @@ export const Button = styled.button<ButtonProps>`
       font-weight: 500;
       font-size: 28px;
       
-      border-color:${isActive ? 'transparent transparent #00b37e transparent ' : 'transparent'};
+      border-color:${
+        $isActive
+          ? "transparent transparent #00b37e transparent "
+          : "transparent"
+      };
 
       
     
