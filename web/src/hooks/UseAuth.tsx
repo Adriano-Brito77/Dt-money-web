@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 export const useAuth = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Wrapper,
   ModalContent,
@@ -13,10 +13,11 @@ import {
 } from "./styles";
 import { Button } from "../Button/styles";
 
+import Context from "../../context/UseContext";
+
 import income from "../../assets/income.png";
 import outcome from "../../assets/outcome.png";
 import { Category } from "../Modal/Category";
-
 import { CgClose } from "react-icons/cg";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
@@ -25,7 +26,7 @@ interface ModalProps {
   closeTransaction: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
+export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
   const [, setSelectedOption] = React.useState("");
   const [activeButton, setActiveButton] = React.useState(true);
   const [OptionsModal, setOptionsModal] = React.useState<Category[]>([]);
@@ -33,8 +34,20 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
     description: "",
     price: 0,
     category: "",
-    type: "",
+    type: "income",
   });
+
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error(
+      "Contexto não encontrado. Verifique se o Provider está correto."
+    );
+  }
+
+  const { searchState } = context;
+
+  const [teste, setTeste] = React.useState(searchState);
 
   useEffect(() => {
     api.get("/category").then((response) => {
@@ -61,6 +74,7 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
   };
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
+
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     setTransaction((prev) => ({
@@ -83,17 +97,16 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
       toast.error("Selecione uma categoria");
       return;
     }
-
+    setTeste(!teste);
     try {
       await api.post("/transaction", transaction);
-
       toast.success("Transação criada com sucesso!");
     } catch (error) {}
     setTransaction({
       description: "",
       price: 0,
       category: "1",
-      type: "income",
+      type: "",
     });
   };
 

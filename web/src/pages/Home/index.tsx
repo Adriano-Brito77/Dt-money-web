@@ -20,13 +20,16 @@ const Home = () => {
   const [openTransaction, setOpenCloseTransaction] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
 
+  const closeModal = () => {
+    window.location.reload();
+    setOpenCloseTransaction(false);
+  };
+
   return (
     <div>
       <Wrapper>
         <Header>
-          {openTransaction && (
-            <Modal closeTransaction={() => setOpenCloseTransaction(false)} />
-          )}
+          {openTransaction && <Modal closeTransaction={() => closeModal()} />}
           {openCategory && (
             <ModalCategory closeTransaction={() => setOpenCategory(false)} />
           )}
