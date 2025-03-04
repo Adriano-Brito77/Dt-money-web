@@ -3,7 +3,7 @@ import { Button as StyledButton } from "./styles";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "search" | "pages";
+  variant?: "primary" | "secondary" | "search" | "pages" | "confirm" | "delete";
   $isActive?: boolean;
 }
 

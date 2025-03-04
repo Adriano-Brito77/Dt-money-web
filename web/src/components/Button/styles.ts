@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-  $variant?: "primary" | "secondary" | "search" | "pages" | "category";
+  $variant?:
+    | "primary"
+    | "secondary"
+    | "search"
+    | "pages"
+    | "category"
+    | "confirm"
+    | "delete";
 
   $isActive?: boolean;
 }
@@ -102,6 +109,21 @@ export const Button = styled.button<ButtonProps>`
       opacity: 0.4;
   }
 
+      `
+      : $variant === "delete"
+      ? `
+      border-radius: 5px;
+      width: 110px;
+      background-color: #f44336;
+      border:none; 
+      `
+      : $variant === "confirm"
+      ? `
+        border-radius: 5px;
+        width: 110px;
+        background-color: #00b37e;
+        border:none;
+      
       `
       : ""}
 `;

@@ -42,8 +42,6 @@ export const useAuth = () => {
       await authUser(data);
       toast.success("Login realizado com sucesso!");
     } catch (err: any) {
-      console.log(err);
-
       const errorMessage =
         err.response.data.message ||
         "Erro ao realizar cadastro. Tente novamente.";

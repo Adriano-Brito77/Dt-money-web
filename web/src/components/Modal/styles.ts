@@ -56,7 +56,7 @@ export const Wrapper = styled.div`
   z-index: 1000;
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.form`
   background: #202024;
   color: #fff;
   padding: 20px;
@@ -93,7 +93,7 @@ export const InputModal = styled.input<inputprops>`
   border-radius: 8px;
   border: none;
   background: #121214;
-  color: #7c7c8a;
+  color: #fff;
   font-size: 16px;
   outline: none;
   padding-left: 16px;
@@ -104,6 +104,13 @@ export const InputModal = styled.input<inputprops>`
       width: 100%;
       padding:10px;
       height: 40px;
+      color: #7c7c8a;
+       &::-webkit-inner-spin-button,
+       &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
     `
       : height === "medium"
       ? `
@@ -118,6 +125,7 @@ export const InputModal = styled.input<inputprops>`
       width: 70%;
       padding:10px;
       height:40px;   
+      color:#fff;
     `
       : height === "register"
       ? `

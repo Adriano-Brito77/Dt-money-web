@@ -15,66 +15,127 @@ import { Button } from "../Button/styles";
 
 import income from "../../assets/income.png";
 import outcome from "../../assets/outcome.png";
+import { Category } from "../Modal/Category";
 
 import { CgClose } from "react-icons/cg";
 import api from "../../utils/api";
+import { toast } from "react-toastify";
 
-const OptionsModal = [
-  {
-    id: "b8db33bd-f396-4b88-bca1-b10efd3d29cf",
-    name: "Comidas",
-    user: "188bb9cd-1ba2-4b57-8b01-5d0a1ea59ea5",
-    createdAt: "2024-12-16T22:25:43.476Z",
-  },
-  {
-    id: "3eaf2311-8123-41e6-a3ff-dfe261e15621",
-    name: "teste",
-    user: "188bb9cd-1ba2-4b57-8b01-5d0a1ea59ea5",
-    createdAt: "2024-12-18T19:01:18.231Z",
-  },
-];
 interface ModalProps {
   closeTransaction: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
   const [, setSelectedOption] = React.useState("");
-  const [activeButtonIncome, setActiveButtonIncome] = React.useState(false);
-  const [activeButtonOutcome, setActiveButtonOutcome] = React.useState(false);
+  const [activeButton, setActiveButton] = React.useState(true);
+  const [OptionsModal, setOptionsModal] = React.useState<Category[]>([]);
+  const [transaction, setTransaction] = React.useState({
+    description: "",
+    price: 0,
+    category: "",
+    type: "",
+  });
 
-  const handleIncome = () => {
-    setActiveButtonIncome(true);
-    setActiveButtonOutcome(false);
+  useEffect(() => {
+    api.get("/category").then((response) => {
+      setOptionsModal(response.data);
+    });
+  }, [transaction]);
+
+  const handleIncome = (e: any) => {
+    e.preventDefault();
+    setActiveButton(true);
+    setTransaction((prev) => ({ ...prev, type: "income" }));
   };
-  const handleOutcome = () => {
-    setActiveButtonIncome(false);
-    setActiveButtonOutcome(true);
+  const handleOutcome = (e: any) => {
+    e.preventDefault();
+    setActiveButton(false);
+    setTransaction((prev) => ({ ...prev, type: "outcome" }));
+  };
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTransaction((prev) => ({
+      ...prev,
+      [name]: name === "price" ? Number(value) : value, // Converte price para número
+    }));
+  };
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
+    setTransaction((prev) => ({
+      ...prev,
+      category: selectedValue,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (transaction.description === "") {
+      toast.error("Preencha o campo de descrição");
+      return;
+    }
+    if (transaction.price === 0) {
+      toast.error("Preencha o campo de preço");
+      return;
+    }
+    if (transaction.category === "") {
+      toast.error("Selecione uma categoria");
+      return;
+    }
+
+    try {
+      await api.post("/transaction", transaction);
+
+      toast.success("Transação criada com sucesso!");
+    } catch (error) {}
+    setTransaction({
+      description: "",
+      price: 0,
+      category: "1",
+      type: "income",
+    });
   };
 
   return (
     <Wrapper>
-      <ModalContent>
+      <ModalContent onSubmit={handleSubmit}>
         <HeaderModal>
           <span>Nova Transação</span>
           <CgClose onClick={closeTransaction} />
         </HeaderModal>
         <BodyModal>
-          <InputModal height="large" placeholder="Descrição" />
-          <InputModal height="large" type="number" placeholder="Preço" />
+          <InputModal
+            height="large"
+            name="description"
+            placeholder="Descrição"
+            onChange={handleChange}
+            value={transaction.description}
+          />
+          <InputModal
+            height="large"
+            name="price"
+            type="number"
+            placeholder="Preço"
+            onChange={handleChange}
+            value={transaction.price}
+          />
 
-          <SelectModal onChange={(e: any) => setSelectedOption(e.target.value)}>
-            <StyledOption value="">Categorias</StyledOption>
-            {OptionsModal.map((option) => (
-              <StyledOption key={option.id} value={option.id}>
-                {option.name}
-              </StyledOption>
-            ))}
+          <SelectModal onChange={handleSelectChange}>
+            <StyledOption value="1">Categorias</StyledOption>
+            {OptionsModal
+              ? OptionsModal.map((option) => (
+                  <StyledOption key={option.id} value={option.id}>
+                    {option.name}
+                  </StyledOption>
+                ))
+              : ""}
           </SelectModal>
         </BodyModal>
         <ContainerButton>
           <ButtonModal
             type="income"
-            isActive={activeButtonIncome}
+            isActive={activeButton}
             onClick={handleIncome}
           >
             <img src={income} alt="income" />
@@ -82,7 +143,7 @@ const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
           </ButtonModal>
           <ButtonModal
             type="outcome"
-            isActive={activeButtonOutcome}
+            isActive={!activeButton}
             onClick={handleOutcome}
           >
             <img src={outcome} alt="outcome" />

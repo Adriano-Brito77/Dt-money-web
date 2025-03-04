@@ -12,12 +12,15 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserProvider>
-        <ToastContainer autoClose={5000} theme="dark"/>
+          <ToastContainer
+            autoClose={5000}
+            theme="dark"
+            position="bottom-right"
+          />
           <Routes>
-            
-          <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
-            
+
             <Route path="/Register" element={<Register />} />
           </Routes>
         </UserProvider>

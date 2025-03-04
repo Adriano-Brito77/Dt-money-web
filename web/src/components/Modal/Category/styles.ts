@@ -21,13 +21,15 @@ export const ModalContent = styled.div<modalProps>`
   ${(props) =>
     props.type
       ? `
-    height: 30%;
+    height: 27%;
     width: 40%;
+    padding:10px;
     `
       : `
-    height: 50%;
-    width: 60%;
-    padding: 10px;
+    min-height: 20%;
+    height: auto;
+    width: 50%;
+    padding:20px;
     `};
 
   background: #202024;
@@ -65,23 +67,22 @@ export const HeaderCategory = styled.div`
 
 export const BodyCategory = styled.form`
   display: flex;
-  height: 85%;
+
   width: 100%;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   padding: 10px;
 `;
 export const CategoryList = styled.div`
-  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  min-height: 85%;
   overflow-y: auto;
-  align-items: center;
-  justify-content: start;
-  padding-left: 12px;
+  overflow-x: hidden;
 `;
 
 export const ContainerCategory = styled.div`
@@ -89,9 +90,19 @@ export const ContainerCategory = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #121214;
-  height: 10%;
-  width: 28%;
+  max-height: 50%;
+  width: 80%;
   color: #fff;
   border-radius: 5px;
   padding: 10px;
+`;
+
+export const ContainerP = styled.p`
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: start;
+  color: #fff;
+  grid-column: 2;
+  font-size: 24px;
 `;
