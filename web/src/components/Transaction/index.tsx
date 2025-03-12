@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, {  useEffect,useContext  } from "react";
 import {
   Footer,
   Search,
@@ -10,7 +10,10 @@ import {
 import api from "../../utils/api";
 
 import { Button } from "../Button/styles";
-import { Context } from "../../context/UseContext";
+
+import Context from "../../context/UseContext";
+
+
 
 interface TransactionData {
   id: string;
@@ -29,23 +32,24 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
   const [search, setSearch] = React.useState<string>("");
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [transactions, setTransactions] = React.useState<TransactionData[]>([]);
-  const [teste, setteste] = React.useState<string>("");
 
   const context = useContext(Context);
+  
+    if (!context) {
+      throw new Error(
+        "Contexto não encontrado. Verifique se o Provider está correto."
+      );
+    }
+  
+    const {transactionsCenter} = context
 
-  if (!context) {
-    throw new Error(
-      "Contexto não encontrado. Verifique se o Provider está correto."
-    );
-  }
-
-  const { searchState } = context;
-
-  useEffect(() => {
-    api.get("/transaction").then((response) => {
-      setTransactions(response.data);
+    useEffect(() => {
+     api.get("/transaction").then((response) => {
+      setTransactions(response.data.transaction);
+      
     });
-  }, [searchState]);
+  
+  }, [transactionsCenter]);
 
   const searchProperties: (keyof TransactionData)[] = [
     "description",
@@ -58,6 +62,8 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
   }, [search]);
 
   const filterTransactions = (transactions: TransactionData[]) => {
+  
+      
     return transactions.filter((transaction) =>
       searchProperties.some((property) => {
         const value = transaction[property as keyof TransactionData];
@@ -70,12 +76,15 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
     );
   };
 
-  const totalPages = Math.ceil(filterTransactions(transactions).length / 10);
+
+    const totalPages = Math.ceil(filterTransactions(transactions).length / 10);
 
   const currentData = () => {
     const startIndex = (currentPage - 1) * 10;
     const endIndex = startIndex + 10;
     return filterTransactions(transactions).slice(startIndex, endIndex);
+
+     
   };
 
   const goToPage = (pageNumber: number) => {
@@ -91,6 +100,9 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
     setCurrentPage(totalPages);
   };
 
+  
+ 
+
   return (
     <Footer {...props}>
       <Wrapper>
@@ -102,7 +114,7 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
       </Wrapper>
 
       <Transaction>
-        {currentData().map((transaction: TransactionData) => (
+        {transactions ? currentData().map((transaction: TransactionData) => (
           <span key={transaction.id}>
             <p>{transaction.description}</p>
             <PStyles type={transaction.type || "income"}>
@@ -111,7 +123,7 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
             <p>{transaction.category}</p>
             <p>{transaction.createdAt}</p>
           </span>
-        ))}
+        )): ""}
       </Transaction>
 
       {totalPages > 1 && (

@@ -22,11 +22,14 @@ import { CgClose } from "react-icons/cg";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 
+
+
 interface ModalProps {
   closeTransaction: () => void;
+  trasition:()=> void
 }
 
-export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
+export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
   const [, setSelectedOption] = React.useState("");
   const [activeButton, setActiveButton] = React.useState(true);
   const [OptionsModal, setOptionsModal] = React.useState<Category[]>([]);
@@ -36,6 +39,8 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
     category: "",
     type: "income",
   });
+ 
+
 
   const context = useContext(Context);
 
@@ -45,9 +50,9 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
     );
   }
 
-  const { searchState } = context;
+  const {getTransactions} = context
 
-  const [teste, setTeste] = React.useState(searchState);
+
 
   useEffect(() => {
     api.get("/category").then((response) => {
@@ -73,8 +78,6 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
     }));
   };
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.preventDefault();
-
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     setTransaction((prev) => ({
@@ -85,6 +88,8 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(OptionsModal)
+    
     if (transaction.description === "") {
       toast.error("Preencha o campo de descrição");
       return;
@@ -97,17 +102,32 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction }) => {
       toast.error("Selecione uma categoria");
       return;
     }
-    setTeste(!teste);
+
     try {
       await api.post("/transaction", transaction);
       toast.success("Transação criada com sucesso!");
-    } catch (error) {}
+      
+    } catch (err:any) {
+
+      const errorMessage = err.response.data.message ||
+        "Erro ao realizar cadastro. Tente novamente.";
+      toast.error(errorMessage);
+
+      return
+    }
+
+    
     setTransaction({
       description: "",
       price: 0,
-      category: "1",
-      type: "",
+      category: transaction.category,
+      type: "income",
     });
+   
+    getTransactions()
+    trasition()
+    
+
   };
 
   return (

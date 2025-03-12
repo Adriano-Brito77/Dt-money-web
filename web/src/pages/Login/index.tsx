@@ -37,12 +37,16 @@ const Auth: React.FC<ContainerProps> = () => {
 
   const { login } = context;
 
+
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.id]: e.target.value });
   };
   const handleSbmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(user);
+    
   };
 
   return (
@@ -73,7 +77,7 @@ const Auth: React.FC<ContainerProps> = () => {
 
           <ContainerLink>
             <LinkAuth>Esqueceu a senha ?</LinkAuth>
-            <LinkAuth href="register">Crie sua conta</LinkAuth>
+            <LinkAuth href="register" >Crie sua conta</LinkAuth>
           </ContainerLink>
 
           <ContainerButton>

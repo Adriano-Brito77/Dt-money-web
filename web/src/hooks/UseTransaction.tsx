@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import api from "../utils/api";
+
 
 interface Transaction {
   id: string;
@@ -10,49 +11,31 @@ interface Transaction {
   user: string;
 }
 
-export const UseTransactions = () => {
-  const [transactionsCenter, setTransactions] = React.useState<Transaction[]>(
-    []
-  );
+export const UseTransactions =  () => {
+  const [transactionsCenter, setTransactions] = React.useState<Transaction[]>([]);
+  const [income, setIncome] = useState(Number)
+  const [outcome, setOutcome] = useState(Number)
+  const [result, setResult] = useState(Number)
 
-  React.useEffect(() => {
-    api.get("/transaction").then((response) => {
-      setTransactions(response.data);
-    });
-  }, []);
-
-  const getTransactionsIncome = () => {
-    const trasacao = transactionsCenter
-      .filter((transaction) => transaction.type === "income")
-      .reduce((acc, transaction) => acc + transaction.price, 0);
-    return trasacao;
-  };
-
-  const getTransactionsOutcome = () => {
-    const trasacao = transactionsCenter
-      .filter((transaction) => transaction.type === "outcome")
-      .reduce((acc, transaction) => acc + transaction.price, 0);
-    return trasacao;
-  };
-
-  const getTransactionsResult = () => {
-    const income = transactionsCenter
-      .filter((transaction) => transaction.type === "income")
-      .reduce((acc, transaction) => acc + transaction.price, 0);
-
-    const outcome = transactionsCenter
-      .filter((transaction) => transaction.type === "outcome")
-      .reduce((acc, transaction) => acc + transaction.price, 0);
-
-    const result = income - outcome;
-    return parseFloat(result.toFixed(2));
-  };
+  
+const getTransactions = async () =>{
+    
+     const response = await api.get("/transaction");
+      
+        setTransactions(response.data.transaction);
+        setIncome(response.data.totalIncome)
+        setOutcome(response.data.totalOutcome)
+        setResult(response.data.result);
+  }
+console.log(income)
+  
 
   return {
-    getTransactionsIncome,
-    getTransactionsOutcome,
-    getTransactionsResult,
+    income,
+    outcome,
+    result,
     transactionsCenter,
+    getTransactions
   };
 };
 

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import {useNavigate } from "react-router-dom";
 
 import api from "../utils/api";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 export const useAuth = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
+
+ 
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -18,8 +20,8 @@ export const useAuth = () => {
       api.defaults.headers.Authorization = `Bearer ${token}`;
       setAuthenticated(true);
     }
-    setLoading(false);
-  }, []);
+   setLoading(false);
+  }, [navigate]);
 
   const register = async (user: any) => {
     try {
@@ -27,13 +29,15 @@ export const useAuth = () => {
         .post("user/register", user)
         .then((response) => response.data);
       toast.success(`${data.message}`);
-      await navigate("/auth");
+      
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message ||
         "Erro ao realizar cadastro. Tente novamente.";
       toast.error(errorMessage);
+      return
     }
+    navigate("/auth")
   };
   const login = async (user: any) => {
     try {
@@ -47,16 +51,21 @@ export const useAuth = () => {
         err.response.data.message ||
         "Erro ao realizar cadastro. Tente novamente.";
       toast.error(errorMessage);
+
+      return
+      
     }
+    navigate("/")
   };
 
   const authUser = async (data: any) => {
-    setAuthenticated(true);
-    console.log(data);
+    
+    
     // Armazenando o token no cookie com um tempo de expiração
     Cookies.set("token", data.acess_token);
+    setAuthenticated(true);
 
-    navigate("/");
+
   };
 
   const logout = async () => {
@@ -67,7 +76,9 @@ export const useAuth = () => {
 
     delete api.defaults.headers.Authorization;
 
-    navigate("/register");
+    navigate("/auth")
+
+
   };
 
   return { register, login, logout, authenticated, loading };

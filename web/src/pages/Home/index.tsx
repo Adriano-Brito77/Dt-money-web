@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header, Wrapper, Container, ContainerButton } from "./styles";
 
 import Button from "../../components/Button";
@@ -10,26 +10,34 @@ import FooterTransaction from "../../components/Transaction";
 import UseTransactions from "../../hooks/UseTransaction";
 import Modal from "../../components/Modal";
 import ModalCategory from "../../components/Modal/Category";
+
 const Home = () => {
   const {
-    getTransactionsIncome,
-    getTransactionsOutcome,
-    getTransactionsResult,
+    income,
+    outcome,
+    result,
+    getTransactions,
   } = UseTransactions();
 
   const [openTransaction, setOpenCloseTransaction] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
 
   const closeModal = () => {
-    window.location.reload();
+    
     setOpenCloseTransaction(false);
   };
+
+  // Carrega as transações ao montar o componente
+  useEffect(() => {
+    getTransactions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);  // Esse array vazio significa que o efeito será executado apenas uma vez, quando o componente montar.
 
   return (
     <div>
       <Wrapper>
         <Header>
-          {openTransaction && <Modal closeTransaction={() => closeModal()} />}
+          {openTransaction && <Modal closeTransaction={() => closeModal()} trasition={() => getTransactions()} />}
           {openCategory && (
             <ModalCategory closeTransaction={() => setOpenCategory(false)} />
           )}
@@ -57,17 +65,17 @@ const Home = () => {
             <CardComponent
               variant="income"
               name="Entradas"
-              value={getTransactionsIncome()}
+              value={income}
             />
             <CardComponent
               variant="outcome"
-              name="Saidas"
-              value={getTransactionsOutcome()}
+              name="Saídas"
+              value={outcome}
             />
             <CardComponent
               variant="result"
               name="Total"
-              value={getTransactionsResult()}
+              value={result}
             />
           </Container>
           <FooterTransaction>teste</FooterTransaction>
