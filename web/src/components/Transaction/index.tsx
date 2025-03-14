@@ -1,4 +1,4 @@
-import React, {  useEffect,useContext  } from "react";
+import React, {  useEffect,useContext, useState  } from "react";
 import {
   Footer,
   Search,
@@ -9,9 +9,12 @@ import {
 } from "./styles";
 import api from "../../utils/api";
 
-import { Button } from "../Button/styles";
+import ConfirmModal from "../Modal/ModalDelete";
 
+import { Button } from "../Button/styles";
+import { CgClose } from "react-icons/cg";
 import Context from "../../context/UseContext";
+import { toast } from "react-toastify";
 
 
 
@@ -32,6 +35,11 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
   const [search, setSearch] = React.useState<string>("");
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [transactions, setTransactions] = React.useState<TransactionData[]>([]);
+  const [openModalDelete, setOpenModalDelete] = React.useState(false)
+  const [transactionDeleted,setTransactionDeleted ] = useState("")
+  const [name, setName] = useState("")
+
+  
 
   const context = useContext(Context);
   
@@ -100,7 +108,23 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
     setCurrentPage(totalPages);
   };
 
+
+  const closeModal = () =>{
+    setOpenModalDelete(false)
+  }
   
+  const deleteCategory = async ()=> {
+
+    try {
+      await api.delete(`transaction/${transactionDeleted}`);
+      const response = await api.get("/transaction");
+      setTransactions(response.data.transaction);
+      toast.success(`Transação excluida com sucesso! `)
+    } catch (error) {
+      console.log(error);
+    }
+    setOpenModalDelete(false)
+  }
  
 
   return (
@@ -114,14 +138,28 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
       </Wrapper>
 
       <Transaction>
+        {openModalDelete && 
+        <ConfirmModal 
+        isOpen={openModalDelete} 
+        onClose={closeModal}  
+        onConfirm={deleteCategory}  
+        message={`Você realmente deseja excluir a transação ${name} ?`} />
+        }
+
         {transactions ? currentData().map((transaction: TransactionData) => (
           <span key={transaction.id}>
             <p>{transaction.description}</p>
             <PStyles type={transaction.type || "income"}>
-              {transaction.type === "outcome" ? "-" : ""} R$ {transaction.price}
+              {transaction.type === "outcome" ? "-" : ""} 
+              R$ {transaction.price.toFixed(2)}
             </PStyles>
             <p>{transaction.category}</p>
             <p>{transaction.createdAt}</p>
+            <b><CgClose onClick={() =>{
+              setTransactionDeleted(transaction.id)
+              setName(transaction.description)
+              setOpenModalDelete(true)
+            }} /></b>
           </span>
         )): ""}
       </Transaction>

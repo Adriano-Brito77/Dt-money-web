@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Header, Wrapper, Container, ContainerButton } from "./styles";
 
 import Button from "../../components/Button";
@@ -10,20 +10,36 @@ import FooterTransaction from "../../components/Transaction";
 import UseTransactions from "../../hooks/UseTransaction";
 import Modal from "../../components/Modal";
 import ModalCategory from "../../components/Modal/Category";
+import ConfirmModal from "../../components/Modal/ModalDelete";
+import { CgLogIn } from "react-icons/cg";
+
+import Context from "../../context/UseContext";
+
 
 const Home = () => {
   const {
     income,
     outcome,
     result,
-    getTransactions,
+    getTransactions
   } = UseTransactions();
+
+  const context = useContext(Context);
+    
+      if (!context) {
+        throw new Error(
+          "Contexto não encontrado. Verifique se o Provider está correto."
+        );
+      }
+    
+      const { logout} = context
 
   const [openTransaction, setOpenCloseTransaction] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
+  const [openAlertLogout, setOpenAlertLogout ] = useState(false)
 
   const closeModal = () => {
-    
+    setOpenAlertLogout(false)
     setOpenCloseTransaction(false);
   };
 
@@ -38,9 +54,8 @@ const Home = () => {
       <Wrapper>
         <Header>
           {openTransaction && <Modal closeTransaction={() => closeModal()} trasition={() => getTransactions()} />}
-          {openCategory && (
-            <ModalCategory closeTransaction={() => setOpenCategory(false)} />
-          )}
+          {openCategory && (<ModalCategory closeTransaction={() => setOpenCategory(false)} />)}
+          {openAlertLogout && (<ConfirmModal isOpen={openAlertLogout} onClose={closeModal} onConfirm={logout} message="Você realmente deseja sair ?"/>)}
 
           <Container>
             <img src={logo} alt="logo" />
@@ -57,6 +72,12 @@ const Home = () => {
                 onClick={() => setOpenCloseTransaction(!openTransaction)}
               >
                 Nova Transação
+              </Button>
+              <Button 
+              variant="logout"
+              onClick={() => setOpenAlertLogout(!openAlertLogout)}>
+                Sair
+                <CgLogIn />
               </Button>
             </ContainerButton>
           </Container>

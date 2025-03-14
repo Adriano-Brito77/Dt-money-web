@@ -35,7 +35,7 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
   const [OptionsModal, setOptionsModal] = React.useState<Category[]>([]);
   const [transaction, setTransaction] = React.useState({
     description: "",
-    price: 0,
+    price: "",
     category: "",
     type: "income",
   });
@@ -72,6 +72,7 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
   };
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    
     setTransaction((prev) => ({
       ...prev,
       [name]: name === "price" ? Number(value) : value, // Converte price para número
@@ -88,13 +89,13 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(OptionsModal)
+    
     
     if (transaction.description === "") {
       toast.error("Preencha o campo de descrição");
       return;
     }
-    if (transaction.price === 0) {
+    if (transaction.price === "") {
       toast.error("Preencha o campo de preço");
       return;
     }
@@ -119,7 +120,7 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
     
     setTransaction({
       description: "",
-      price: 0,
+      price: "",
       category: transaction.category,
       type: "income",
     });

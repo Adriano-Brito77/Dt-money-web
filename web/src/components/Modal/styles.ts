@@ -61,9 +61,9 @@ export const ModalContent = styled.form`
   color: #fff;
   padding: 20px;
   border-radius: 8px;
-  height: 52%;
-  width: 90%;
-  max-width: 500px;
+  height: 57%;
+  width: 32%;
+  
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
 `;
@@ -78,12 +78,14 @@ export const HeaderModal = styled.div`
   span {
     margin-top: 10px;
   }
+  margin-left: 20px;
 `;
 
 export const BodyModal = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
+  margin-left: 20px;
   gap: 10px;
   margin-top: 40px;
 `;
@@ -96,19 +98,20 @@ export const InputModal = styled.input<inputprops>`
   color: #fff;
   font-size: 16px;
   outline: none;
-  padding-left: 16px;
+ 
 
   ${({ height }) =>
     height === "large"
       ? `
-      width: 100%;
+      width: 89%;
       padding:10px;
       height: 40px;
+      
       color: #7c7c8a;
        &::-webkit-inner-spin-button,
        &::-webkit-outer-spin-button {
     -webkit-appearance: none;
-    margin: 0;
+    
   }
 }
     `
@@ -144,7 +147,7 @@ export const InputModal = styled.input<inputprops>`
 
 export const SelectModal = styled.select`
   display: flex;
-  width: 105%;
+  width: 92.5%;
   height: 60px;
   padding: 10px;
   margin-bottom: 10px;
@@ -154,6 +157,7 @@ export const SelectModal = styled.select`
   color: #7c7c8a;
   font-size: 16px;
   outline: none;
+  
 `;
 
 export const StyledOption = styled.option`
@@ -166,10 +170,12 @@ export const StyledOption = styled.option`
 
 export const ContainerButton = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  width: 470px;
+  
+  width: 92.5%;
+  margin-left: 20px;
   justify-content: space-between;
   margin-top: 20px;
+  
 `;
 
 export const SaveButton = styled.div`
@@ -177,5 +183,6 @@ export const SaveButton = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 28px;
-  width: 470px;
+  width: 92.5%;
+  margin-left: 20px;
 `;

@@ -35,7 +35,7 @@ const Auth: React.FC<ContainerProps> = () => {
     );
   }
 
-  const { login } = context;
+  const { login,loading } = context;
 
 
 
@@ -76,12 +76,12 @@ const Auth: React.FC<ContainerProps> = () => {
           />
 
           <ContainerLink>
-            <LinkAuth>Esqueceu a senha ?</LinkAuth>
+            <LinkAuth href="forgot-password">Esqueceu a senha ?</LinkAuth>
             <LinkAuth href="register" >Crie sua conta</LinkAuth>
           </ContainerLink>
 
           <ContainerButton>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" disabled={loading}>
               Entrar
             </Button>
           </ContainerButton>

@@ -37,7 +37,7 @@ export const Transaction = styled.div`
   margin-top: 24px;
   span {
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 0.5fr;
+    grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
     justify-items: start;
     align-items: center;
     padding: 10px;
@@ -46,6 +46,22 @@ export const Transaction = styled.div`
     
     border-radius: 5px;
     
+    b{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & svg{
+        font-size:20px;
+        }
+
+      :hover{
+      color: red;
+    }
+  }
+    }
   }
   p {
     font-size: 16px;
@@ -53,6 +69,9 @@ export const Transaction = styled.div`
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
       sans-serif;
   }
+  svg{
+    
+    
    
 `;
 
@@ -63,6 +82,7 @@ export const WrapperPage = styled.div`
   color: #fff;
   gap: 16px;
   margin-top: 15px;
+  padding: 20px;
 `;
 
 export const PStyles = styled.p<TransactionProps>`

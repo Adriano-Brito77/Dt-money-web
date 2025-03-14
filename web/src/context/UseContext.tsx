@@ -20,6 +20,7 @@ interface AuthContextProps {
   logout: () => void;
   authenticated: boolean;
   loading: boolean;
+  Username: string
 }
 
 interface TransactionContextProps {

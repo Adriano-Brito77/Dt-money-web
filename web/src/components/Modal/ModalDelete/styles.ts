@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
 
 export const ModalContent = styled.div`
   display: flex;
-  height: 10%;
+  height: 15%;
   width: 28%;
   padding: 16px;
   background: #202024;
@@ -41,6 +41,7 @@ export const ContainerSvg = styled.div`
 export const HeaderCategory = styled.p`
   display: flex;
   margin: 0;
+  font-size: large;
 `;
 export const ContainerTitle = styled.div`
   display: flex;
@@ -49,7 +50,7 @@ export const ContainerTitle = styled.div`
 
 export const ContainerButtonConfirm = styled.div`
   display: flex;
-  height: 50%;
+  height: 30%;
   width: 100%;
   justify-content: space-evenly;
 `;

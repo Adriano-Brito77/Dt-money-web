@@ -6,23 +6,30 @@ import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
 import Auth from "./pages/Login/index";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/Forgot-Password";
+
+
 import { useAuth } from "./hooks/UseAuth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 function App() {
   
  
-  const { authenticated } = useAuth();
+  const [auth, setAuth] = useState(false)
+  const {authenticated} = useAuth()
   const navigate = useNavigate()
   
   useEffect(()=>{
-    if(authenticated){
+    const token =  Cookies.get("access_token")
+    if(token){
       navigate("/")
+      setAuth(true)
     }
+    
 
-
-  },[authenticated])
-
+  },[authenticated,navigate])
+  
  
 
   return (
@@ -33,9 +40,10 @@ function App() {
         position="bottom-right"
       />
       <Routes>
-        <Route path="/" element={authenticated ? <Home /> : <Navigate to="/auth" />} />
+        <Route path="/" element={auth ? <Home /> : <Navigate to="/auth"/> } />
         <Route path="/auth" element={<Auth />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>} />
       </Routes>
     </div>
   );

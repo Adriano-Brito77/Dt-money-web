@@ -8,15 +8,20 @@ interface ButtonProps {
     | "pages"
     | "category"
     | "confirm"
-    | "delete";
+    | "delete"
+    | "logout"
+    | "reset"
 
   $isActive?: boolean;
+  des?:boolean
+  
 }
 
 export const Button = styled.button<ButtonProps>`
   color: #fff;
+  
 
-  ${({ $variant, $isActive }) =>
+  ${({ $variant, $isActive,des }) =>
     $variant === "primary"
       ? `
       background-color: #00b37e; 
@@ -25,6 +30,7 @@ export const Button = styled.button<ButtonProps>`
       height: 50px;
       font-size: bold;
       border-radius: 5px;
+      
 
       &:hover {
         opacity: 0.8;
@@ -86,7 +92,7 @@ export const Button = styled.button<ButtonProps>`
       display:flex;
       gap: 20px;
       justify-content: center;
-      align-items: center;
+      aling-items: center;
       background-color: #202024; 
       width:40%;
       height: 50px;
@@ -120,10 +126,50 @@ export const Button = styled.button<ButtonProps>`
       : $variant === "confirm"
       ? `
         border-radius: 5px;
+        
         width: 110px;
         background-color: #00b37e;
         border:none;
       
       `
-      : ""}
+      :  $variant === "logout"
+      ? `
+        border-radius: 5px;
+        display:flex;
+        justify-content: space-evenly;
+        
+        align-items: center;
+        width: 98px;
+        background-color:rgb(47, 47, 51);
+        border:none;
+
+        & svg{
+        font-size:20px;
+        }
+      
+        &:hover {
+        background-color: #f44336;
+        }
+        &:disabled {
+        opacity: 0.4;
+      `
+      : $variant === "reset"
+      ? `
+      background-color: #00b37e; 
+      border:none;
+      width: 190px;
+      height: 50px;
+      font-size: bold;
+      border-radius: 5px;
+       ${des 
+        ? `
+        opacity: 0.3;
+       pointer-events: none;
+        
+        ` : ""}
+
+      &:hover {
+        opacity: 0.8;
+      }
+      `:""}
 `;

@@ -27,7 +27,7 @@ const getTransactions = async () =>{
         setOutcome(response.data.totalOutcome)
         setResult(response.data.result);
   }
-console.log(income)
+
   
 
   return {
