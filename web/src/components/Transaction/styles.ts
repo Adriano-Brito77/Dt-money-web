@@ -28,6 +28,7 @@ export const Footer = styled.div`
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
+  padding-bottom: 30px;
 `;
 
 export const Transaction = styled.div`

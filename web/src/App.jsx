@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Auth from "./pages/Login/index";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/Forgot-Password";
+import ResetPassword from "./pages/Reset-Password";
 
 
 import { useAuth } from "./hooks/UseAuth";
@@ -44,6 +45,7 @@ function App() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword/>} />
+        <Route path="/reset-password" element={<ResetPassword/>} />
       </Routes>
     </div>
   );

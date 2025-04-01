@@ -7,28 +7,39 @@ export const Wrapper = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
+`
 
-
-` 
-
-export const Container = styled.div`
-    height: auto;
-    width: 600px;
-    border-radius: 5px;
-   ;
+export const FormWrapper = styled.form`
     display: flex;
     flex-direction: column;
-    padding: 20px;
     align-items: center;
+    gap: 1rem;
+    width: 40%;
+    height: 50%;
+    border-radius: 10px;
     background-color: #323238;
-
+    padding: 30px;
 `
-export const ContainerInputReset = styled.div`
+
+export const Hearder = styled.h1`
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+color: #fff;
+margin: 0;
+`
+
+export const ContainerIpunt = styled.div`
+
     width: 100%;
+    max-width: 80%;
     gap: 10px;
     color: #fff;
     display: flex;
     flex-direction: column;
+    
+    
     
 
     label{
@@ -37,30 +48,23 @@ export const ContainerInputReset = styled.div`
 
 `
 
-
-export const ContainerElement = styled.form`
-    
+export const ContainerIpuntReset = styled.div`
     height: 100%;
     width: 100%;
-    max-width: 80%;
     display: flex;
     flex-direction:column;
     align-items: center;
-    gap: 20px;
-`
-
-export const Title = styled.h1`
-    display: flex;
     justify-content: center;
-    font-size: 32px;
-    width: 100%;
-    color: #fff;
-`
+    gap: 10px;
+    
+`  
 
-export const SubTitle = styled.p`
-    color: #fff;
-    font-size: 16px;
+export const ContainerButton = styled.div`
+    display: flex;
     width: 100%;
-    height: 40px;
-`
-
+    
+    align-items: center;
+    justify-content: center;
+    
+    
+    `

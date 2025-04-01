@@ -136,8 +136,7 @@ export const Button = styled.button<ButtonProps>`
       ? `
         border-radius: 5px;
         display:flex;
-        justify-content: space-evenly;
-        
+        justify-content: space-evenly;        
         align-items: center;
         width: 98px;
         background-color:rgb(47, 47, 51);
@@ -159,7 +158,7 @@ export const Button = styled.button<ButtonProps>`
       border:none;
       width: 190px;
       height: 50px;
-      font-size: bold;
+      
       border-radius: 5px;
        ${des 
         ? `
