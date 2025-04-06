@@ -124,6 +124,8 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
       console.log(error);
     }
     setOpenModalDelete(false)
+    window.location.reload()
+
   }
  
 

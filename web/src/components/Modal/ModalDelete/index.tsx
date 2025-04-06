@@ -10,6 +10,7 @@ import {
 import { Button } from "../../Button/styles";
 import { CgClose } from "react-icons/cg";
 
+
 interface confirmModal {
   isOpen: boolean;
   onClose: () => void;
@@ -23,7 +24,12 @@ const ConfirmModal: React.FC<confirmModal> = ({
   onConfirm,
   message,
 }) => {
-  if (!isOpen) return null;
+ 
+  if(!isOpen)return null;
+
+
+
+
   return (
     <Wrapper>
       <ModalContent>
