@@ -48,6 +48,7 @@ const ForgotPassword = () =>{
 return(
     <Wrapper>
         <Container>
+            
             <Title>Resete de senha</Title>
                 <ContainerElement onSubmit={handleSubmit}>
                     <SubTitle>Digite o e-mail vinculado a sua conta e iremos te enviar um link para defenir sua senha.</SubTitle>

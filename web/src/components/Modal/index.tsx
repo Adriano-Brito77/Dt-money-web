@@ -26,10 +26,10 @@ import { toast } from "react-toastify";
 
 interface ModalProps {
   closeTransaction: () => void;
-  trasition:()=> void
+  transation:()=> void
 }
 
-export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
+export const Modal: React.FC<ModalProps> = ({ closeTransaction, transation}) => {
   const [, setSelectedOption] = React.useState("");
   const [activeButton, setActiveButton] = React.useState(true);
   const [OptionsModal, setOptionsModal] = React.useState<Category[]>([]);
@@ -78,6 +78,7 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
     e.preventDefault();
     
     
+    
     if (transaction.description === "") {
       toast.error("Preencha o campo de descrição");
       return;
@@ -113,9 +114,9 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
     });
    
     
-    trasition()
-
-    console.log(trasition)
+    
+    await transation()
+    
     
 
   };

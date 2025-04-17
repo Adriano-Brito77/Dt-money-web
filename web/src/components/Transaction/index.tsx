@@ -1,4 +1,4 @@
-import React, {  useEffect,useContext, useState  } from "react";
+import React, {  useEffect, useState  } from "react";
 import {
   Footer,
   Search,
@@ -13,7 +13,7 @@ import ConfirmModal from "../Modal/ModalDelete";
 
 import { Button } from "../Button/styles";
 import { CgClose } from "react-icons/cg";
-import Context from "../../context/UseContext";
+
 import { toast } from "react-toastify";
 
 
@@ -30,6 +30,7 @@ interface TransactionData {
 interface FooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   transation: ()=>void
+  results:number
 }
 
 const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
@@ -42,15 +43,7 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
 
   
 
-  const context = useContext(Context);
   
-    if (!context) {
-      throw new Error(
-        "Contexto não encontrado. Verifique se o Provider está correto."
-      );
-    }
-  
-    const {transactionsCenter } = context
 
     useEffect(() => {
        api.get("/transaction").then((response) => {
@@ -58,7 +51,7 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
       
     });
   
-  }, [transactionsCenter]);
+  }, [props.results]);
   
 
   const searchProperties: (keyof TransactionData)[] = [

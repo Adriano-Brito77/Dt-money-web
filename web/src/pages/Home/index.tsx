@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useMemo } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Header, Wrapper, Container, ContainerButton } from "./styles";
 
 import Button from "../../components/Button";
@@ -50,18 +50,13 @@ const Home = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); 
 
-  useMemo(() => {
-    getTransactions();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
-
   
 
   return (
     <div>
       <Wrapper>
         <Header>
-          {openTransaction && <Modal closeTransaction={() => closeModal()} trasition={() => getTransactions()} />}
+          {openTransaction && <Modal closeTransaction={() => closeModal()} transation={() => getTransactions()} />}
           {openCategory && (<ModalCategory closeTransaction={() => setOpenCategory(false)} />)}
           {openAlertLogout && (<ConfirmModal isOpen={openAlertLogout} onClose={closeModal} onConfirm={logout} message="Você realmente deseja sair ?"/>)}
 
@@ -108,7 +103,7 @@ const Home = () => {
             />
           </Container>
           
-          <FooterTransaction transation = {getTransactions}>teste</FooterTransaction>
+          <FooterTransaction transation = {getTransactions}   results = {result}>teste</FooterTransaction>
         </Header>
       </Wrapper>
     </div>
