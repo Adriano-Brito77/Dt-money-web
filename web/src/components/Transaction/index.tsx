@@ -29,6 +29,7 @@ interface TransactionData {
 
 interface FooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  transation: ()=>void
 }
 
 const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
@@ -49,15 +50,16 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
       );
     }
   
-    const {transactionsCenter} = context
+    const {transactionsCenter } = context
 
     useEffect(() => {
-     api.get("/transaction").then((response) => {
+       api.get("/transaction").then((response) => {
       setTransactions(response.data.transaction);
       
     });
   
   }, [transactionsCenter]);
+  
 
   const searchProperties: (keyof TransactionData)[] = [
     "description",
@@ -118,13 +120,14 @@ const FooterTransaction: React.FC<FooterProps> = ({ children, ...props }) => {
     try {
       await api.delete(`transaction/${transactionDeleted}`);
       const response = await api.get("/transaction");
+      await props.transation()
       setTransactions(response.data.transaction);
       toast.success(`Transação excluida com sucesso! `)
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`)
     }
     setOpenModalDelete(false)
-    window.location.reload()
+    
 
   }
  

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { Header, Wrapper, Container, ContainerButton } from "./styles";
 
 import Button from "../../components/Button";
@@ -21,7 +21,8 @@ const Home = () => {
     income,
     outcome,
     result,
-    getTransactions
+    getTransactions,
+    
   } = UseTransactions();
 
   const context = useContext(Context);
@@ -47,7 +48,14 @@ const Home = () => {
   useEffect(() => {
     getTransactions();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);  // Esse array vazio significa que o efeito será executado apenas uma vez, quando o componente montar.
+  }, []); 
+
+  useMemo(() => {
+    getTransactions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); 
+
+  
 
   return (
     <div>
@@ -99,7 +107,8 @@ const Home = () => {
               value={result}
             />
           </Container>
-          <FooterTransaction>teste</FooterTransaction>
+          
+          <FooterTransaction transation = {getTransactions}>teste</FooterTransaction>
         </Header>
       </Wrapper>
     </div>

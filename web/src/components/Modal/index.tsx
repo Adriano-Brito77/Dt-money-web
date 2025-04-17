@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Wrapper,
   ModalContent,
@@ -13,7 +13,7 @@ import {
 } from "./styles";
 import { Button } from "../Button/styles";
 
-import Context from "../../context/UseContext";
+
 
 import income from "../../assets/income.png";
 import outcome from "../../assets/outcome.png";
@@ -39,22 +39,9 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
     category: "",
     type: "income",
   });
- 
 
-
-  const context = useContext(Context);
-
-  if (!context) {
-    throw new Error(
-      "Contexto não encontrado. Verifique se o Provider está correto."
-    );
-  }
-
-  const {getTransactions} = context
-
-
-
-  useEffect(() => {
+  
+ useEffect(() => {
     api.get("/category").then((response) => {
       setOptionsModal(response.data);
     });
@@ -125,8 +112,10 @@ export const Modal: React.FC<ModalProps> = ({ closeTransaction, trasition}) => {
       type: "income",
     });
    
-    getTransactions()
+    
     trasition()
+
+    console.log(trasition)
     
 
   };

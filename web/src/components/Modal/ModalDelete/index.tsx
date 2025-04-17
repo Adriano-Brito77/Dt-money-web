@@ -10,6 +10,11 @@ import {
 import { Button } from "../../Button/styles";
 import { CgClose } from "react-icons/cg";
 
+import React, { useContext } from "react";
+
+import Context from "../../../context/UseContext";
+
+
 
 interface confirmModal {
   isOpen: boolean;
@@ -24,6 +29,21 @@ const ConfirmModal: React.FC<confirmModal> = ({
   onConfirm,
   message,
 }) => {
+
+
+
+    
+
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error(
+      "Contexto não encontrado. Verifique se o Provider está correto."
+    );
+  }
+
+  
+
  
   if(!isOpen)return null;
 
@@ -43,7 +63,7 @@ const ConfirmModal: React.FC<confirmModal> = ({
           </ContainerSvg>
         </Containermodal>
         <ContainerButtonConfirm>
-          <Button $variant="confirm" onClick={onConfirm}>
+          <Button $variant="confirm" onClick={() => {onConfirm()}}>
             Confirmar
           </Button>
           <Button $variant="delete" onClick={onClose}>

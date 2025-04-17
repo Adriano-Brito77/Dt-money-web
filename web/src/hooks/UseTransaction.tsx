@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../utils/api";
 
 
@@ -16,17 +16,20 @@ export const UseTransactions =  () => {
   const [income, setIncome] = useState(Number)
   const [outcome, setOutcome] = useState(Number)
   const [result, setResult] = useState(Number)
+  
 
   
-const getTransactions = async () =>{
-    
-     const response = await api.get("/transaction");
-      
+
+  
+const getTransactions = async  () =>{
+
+  const response = await api.get("/transaction");
         setTransactions(response.data.transaction);
         setIncome(response.data.totalIncome)
         setOutcome(response.data.totalOutcome)
         setResult(response.data.result);
-  }
+}
+  
 
   
 
@@ -39,4 +42,4 @@ const getTransactions = async () =>{
   };
 };
 
-export default UseTransactions;
+export default UseTransactions
